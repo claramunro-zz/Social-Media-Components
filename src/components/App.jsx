@@ -2,23 +2,38 @@ import React from "react";
 import Navbar from './Navbar';
 import Badge from './Badge';
 import BadgeBio from './BadgeBio';
-import Feed from './Feed'
 import FriendList from './FriendList';
+import FeedPostControl from "./FeedPostControl";
 
-function App() {
+class App extends React.Component {
 
-  let columns = {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(3, 1fr)',
-    padding: '1em 0 0 0'
+  constructor(props) {
+    super(props);
+    this.state = {
+      masterPostList: []
+    };
+    this.handleAddingNewPostToList = this.handleAddingNewPostToList.bind(this)
   }
 
-  return (
+  handleAddingNewPostToList(newPost) {
+    var newMasterPostList = this.state.masterPostList.slice();
+    newMasterPostList.push(newPost);
+    this.setState({masterPostList: newMasterPostList});
+  }
+  
+  render() { 
+    return (
     <div>
         <style jsx global>{`
 
         * {
           font-family: monospace;
+        }
+
+        .columns {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          padding: 1em 0 0 0;
         }
 
 
@@ -69,12 +84,12 @@ function App() {
             margin: '1em 0 1em 0',
             background-color: blue;
 
-          }
+                                    
+                                                             
+          `}</style>            
 
-          `}</style>
-
-      <Navbar/>
-      <div style={columns} >
+      <Navbar/>                    
+      <div className="columns">
 
         <div>
           <Badge/>
@@ -82,7 +97,7 @@ function App() {
         </div>
 
         <div>
-          <Feed/>
+          <FeedPostControl onNewPostCreation={this.handleAddingNewPostToList} newList={this.state.masterList}/>                                                               
         </div> 
 
         <div>
@@ -92,7 +107,8 @@ function App() {
       </div>
 
     </div>
-  );
+    );
+  }
 }
 
 export default App;

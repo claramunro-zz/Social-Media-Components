@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function FeedPost(props) {
+function Post(props) {
   
   let image = {
     width: '50px',
@@ -20,14 +20,14 @@ function FeedPost(props) {
 
   }
 
-
+  console.log(props.name)
 
   return (
 
     <div style={border}>
       <img style={image} src={props.img}/>
       <div id="textFeed">
-        <p><strong>{props.name}</strong></p>
+        <h1><strong>{props.name}</strong></h1>
         <p>{props.text}</p>
       </div>
     </div>
@@ -35,10 +35,11 @@ function FeedPost(props) {
   );
 }
 
-FeedPost.propTypes = {
-  img: PropTypes.image,
-  name: PropTypes.string,
-  text: PropTypes.string
-}
 
-export default FeedPost;
+// Post.propTypes = {
+//   img: PropTypes.string,
+//   name: PropTypes.string,
+//   text: PropTypes.string
+// }
+
+export default Post;
